@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>🎯 Student Performance Predictor</h2>
+
+    <form method="post">
+
+        <label>Study Hours:</label>
+        <input type="number" step="0.1" name="study" required>
+
+        <label>Attendance (%):</label>
+        <input type="number" step="0.1" name="attendance" required>
+
+        <label>Previous Score:</label>
+        <input type="number" step="0.1" name="previous" required>
+
+        <label>Practice Papers:</label>
+        <input type="number" step="0.1" name="practice" required>
+
+        <label>Distraction Time:</label>
+        <input type="number" step="0.1" name="distraction" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <h3>📊 Predicted Score: {{ "%.2f"|format(prediction) }}</h3>
+    </div>
+
+    <div class="graphs">
+        <h3>📊 Study vs Score</h3>
+        <img src="{{ url_for('static', filename='graph.png') }}">
+
+        <h3>📈 Feature Importance</h3>
+        <img src="{{ url_for('static', filename='feature.png') }}">
+    </div>
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
